@@ -12,7 +12,7 @@ export default function Page() {
   const [loading, setLoading] = useState<boolean>(false);
   const [tokenCleanned, setTokenCleanned] = useState<boolean>(false);
 
-  const { token, setToken } = useContext(AuthContext);
+  const { token, setToken, loading: tokenLoading } = useContext(AuthContext);
 
   const signIn = async (e: any) => {
     e.preventDefault();
@@ -43,9 +43,12 @@ export default function Page() {
   }, [token, tokenCleanned]);
 
   useEffect(() => {
+    if (tokenLoading || tokenCleanned)
+      return;
+
     setToken(null as any);
     setTokenCleanned(true);
-  }, []);
+  }, [tokenLoading, tokenCleanned]);
 
   return (
     <>
