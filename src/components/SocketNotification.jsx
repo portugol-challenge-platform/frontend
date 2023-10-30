@@ -4,6 +4,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import { io } from 'socket.io-client';
 import { AuthContext } from '../contexts/authContext';
 import 'react-notifications/lib/notifications.css';
+import { API_URL } from '@/config';
 
 export const SocketNotification = () => {
     const { token, loading } = useContext(AuthContext);
@@ -14,7 +15,7 @@ export const SocketNotification = () => {
         if (!token) return;
 
         const socket = io(
-            'http://localhost:3000',
+            API_URL,
             {
                 transportOptions: {
                     polling: {
